@@ -1,0 +1,54 @@
+package com;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+
+@Path("/json/service")
+public class JSONresource {
+
+	@GET
+	@Path("/get")
+	@Produces("application/json")
+	public Product getApp() {
+		Product pr = new Product();
+		pr.setId(1);
+		pr.setName("Hello world");
+		return pr;
+	}
+	
+	@POST
+	@Path("/post")
+	@Consumes("application/json")
+	public Response postApp(Product pr) {
+		String pstatus ="product created - "+pr.getId()+" "+pr.getName();
+		return Response.status(201).entity(pstatus).build();
+	}
+}
+
+
+
+Product.java
+package com;
+
+public class Product {
+	String name; int id;
+public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+}
+}
